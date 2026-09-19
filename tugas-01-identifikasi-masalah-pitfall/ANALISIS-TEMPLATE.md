@@ -4,7 +4,7 @@
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| [nama 1] | [nim] | [pitfall/bagian yang dikerjakan] |
+| [Anandhaka Ghibran MAS] | [103072400135] | [The Network Is Reliable] |
 | Riyan Chandra Saputra | 103072400129 | Pitfall 2: Latency is Zero |
 | [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
 
