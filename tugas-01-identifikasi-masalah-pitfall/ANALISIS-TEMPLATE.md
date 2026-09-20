@@ -8,19 +8,17 @@
 | Riyan Chandra Saputra | 103072400129 | Pitfall 2: Latency is Zero |
 | [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
 
-## Pitfall 1: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 1: [network is always reliable, no need for retry] — ditulis oleh [Anandhaka Ghibran MAS]
 
-**Bukti di skenario:** [kutip/paraphrase bagian skenario]
+**Bukti di skenario:** Pada point ke 3 yaitu "Tim menemukan bahwa kode mereka menulis asumsi seperti # network is always reliable, no need for retry dan tidak ada timeout sama sekali pada pemanggilan antar service (modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu)."
 
-**Kenapa ini keliru:** [penjelasan]
+**Kenapa ini keliru:** Dalam sebuah sistem apalagi sistem terdistribusi, komunikasi yang dilakukan melalui jaringann tidak mungkin tidak mengalami sebuah error setidaknya sekali. Request dapat mengalami keterlambatan, packet loss, koneksi terputus, atau service tujuan tidak merespons. Asumsi yang menganggap jaringan selalu reliable membuat tidak adanya sistem yang memiliki mekanisme penanganan saat terjadi gagal komunikasi atau sistem pencegahnya.
 
-**Dampak ke FoodGo:** [mekanisme kegagalan konkret]
+**Dampak ke FoodGo:** Jika salah satu service mengalami gangguan, service lain yang sedang menunggu respons dapat ikut mengalami masalah. Request bisa menumpuk dan waktu respons menjadi semakin lama. Jika kondisi tersebut terjadi ketika jumlah pesanan sedang tinggi, beberapa request dapat mengalami timeout dan membuat aplikasi menjadi tidak responsif.
 
-**Solusi desain awal:** [usulan solusi]
+**Solusi desain awal:** FoodGo dapat menerapkan timeout agar sistem tidak menunggu respons terlalu lama. Selain itu, dapat digunakan mekanisme retry ketika terjadi kegagalan sementara, misalnya dengan memberikan jeda sebelum mencoba kembali. Untuk mencegah service yang bermasalah terus menerima request, FoodGo juga dapat menggunakan circuit breaker.
 
-**Trade-off:** [apa yang dikorbankan/risiko dari solusi ini]
-
----
+**Trade-off:** Penggunaan retry memang dapat membantu ketika terjadi gangguan sementara, tetapi jika dilakukan terlalu sering justru dapat menambah beban pada service yang sedang bermasalah. Karena itu, jumlah percobaan perlu dibatasi dan dapat menggunakan exponential backoff. Selain itu, penggunaan message queue dan circuit breaker membuat sistem menjadi lebih kompleks karena membutuhkan komponen dan pengelolaan tambahan.
 
 ## Pitfall 2: Latency is Zero — ditulis oleh Riyan Chandra Saputra
 
