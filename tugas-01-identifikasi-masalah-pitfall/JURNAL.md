@@ -2,7 +2,7 @@
 
 > Isi jurnal ini selama proses diskusi berlangsung, bukan ditulis ulang rapi di akhir. Tulis dengan gaya bebas — poin diskusi, kebuntuan, perubahan pikiran.
 
-## [Tanggal diskusi 1 22 September 2026]
+## [Tanggal diskusi 1 - 22 September 2026]
 - Peserta: [Anandhaka Ghibran MAS, Riyan Chandra Saputra, Achbarul Filmi]
 - Poin diskusi: <br>1. Menentukan tiga pitfall yang akan digunakan, yaitu The network is reliable, Latency is zero, dan Single Point of Failure.
                 <br>2. Membahas bukti dari skenario yang mendukung setiap pitfall.
