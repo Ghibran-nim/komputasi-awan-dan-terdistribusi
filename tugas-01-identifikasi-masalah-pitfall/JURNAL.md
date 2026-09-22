@@ -4,7 +4,7 @@
 
 ## [Tanggal diskusi 1]
 - Peserta: [Anandhaka Ghibran MAS, Riyan Chandra Saputra, Achbarul Filmi]
-- Poin diskusi: 1. Menentukan tiga pitfall yang akan digunakan, yaitu The network is reliable, Latency is zero, dan Single Point of Failure.
+- Poin diskusi: <br>1. Menentukan tiga pitfall yang akan digunakan, yaitu The network is reliable, Latency is zero, dan Single Point of Failure.
                 <br>2. Membahas bukti dari skenario yang mendukung setiap pitfall.
                 <br>3. Membahas masalah yang terjadi pada skenario FoodGo.
 - Perbedaan pendapat (jika ada): tidak ada, karna kebetulan kami memiliki pemandangan yang sama
