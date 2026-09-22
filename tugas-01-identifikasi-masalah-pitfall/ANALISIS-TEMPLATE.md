@@ -6,7 +6,7 @@
 |---|---|---|
 | [Anandhaka Ghibran MAS] | [103072400135] | [Pitfall 1:The Network Is Reliable] |
 | Riyan Chandra Saputra | 103072400129 | Pitfall 2: Latency is Zero |
-| Achbarul Filmi | 103072400166 | Pitfall 3:  |
+| Achbarul Filmi | 103072400166 | Pitfall 3: Bandwidth is infinite |
 
 ## Pitfall 1: [network is always reliable, no need for retry] — ditulis oleh [Anandhaka Ghibran MAS]
 
@@ -34,7 +34,7 @@
 
 ---
 
-## Pitfall 3: bandwidth is infinite — ditulis oleh Achbarul Filmi
+## Pitfall 3: Bandwidth is infinite — ditulis oleh Achbarul Filmi
 
 **Bukti di skenario:** Pada bagian "Saat trafik naik, satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama." Kondisi tersebut menunjukkan bahwa ketika trafik FoodGo meningkat, beban yang harus ditangani oleh sistem juga meningkat. Semua modul masih berjalan pada satu server dan satu proses yang sama sehingga kapasitas resource yang tersedia menjadi terbatas.
 
