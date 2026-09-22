@@ -1,14 +1,14 @@
 # Tugas 1 — Analisis Pitfall FoodGo
 
-**Kelompok:** [nama kelompok]
+**Kelompok:** [Umazing!!]
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| [Anandhaka Ghibran MAS] | [103072400135] | [Pitfall 1:The Network Is Reliable] |
+| Anandhaka Ghibran MAS | 103072400135 | Pitfall 1:The Network Is Reliable |
 | Riyan Chandra Saputra | 103072400129 | Pitfall 2: Latency is Zero |
 | Achbarul Filmi | 103072400166 | Pitfall 3: Bandwidth is infinite |
 
-## Pitfall 1: [network is always reliable, no need for retry] — ditulis oleh [Anandhaka Ghibran MAS]
+## Pitfall 1: network is always reliable, no need for retry — ditulis oleh Anandhaka Ghibran MAS
 
 **Bukti di skenario:** Pada point ke 3 yaitu "Tim menemukan bahwa kode mereka menulis asumsi seperti # network is always reliable, no need for retry dan tidak ada timeout sama sekali pada pemanggilan antar service (modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu)."
 
@@ -50,4 +50,4 @@
 
 ## Kesimpulan Kelompok
 
-[Ringkasan: jika FoodGo memperbaiki ketiga pitfall ini, apa arsitektur yang disarankan secara garis besar? Kaitkan dengan Tugas 2.]
+Ringkasan: Dari ketiga pitfall yang ditemukan, masalah utama FoodGo berkaitan dengan komunikasi antar-service dan kemampuan sistem dalam menghadapi peningkatan trafik. FoodGo dapat dirancang dengan memisahkan beberapa service seperti Order, Payment, dan Notification, serta menggunakan timeout, retry, dan circuit breaker untuk mengatasi gangguan dalam komunikasi dan membuat komponen tambahan seperti message queue, load balancer, dan beberapa instance service yang dapat membantu membagi beban saat trafik meningkat. Dengan demikian, FoodGo diharapkan mampu dalam menangani latency, gangguan komunikasi, dan lonjakan trafik.
