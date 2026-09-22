@@ -34,9 +34,17 @@
 
 ---
 
-## Pitfall 3: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 3: bandwidth is infinite — ditulis oleh Achbarul Filmi
 
-(ulangi struktur di atas)
+**Bukti di skenario:** Pada bagian "Saat trafik naik, satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama." Kondisi tersebut menunjukkan bahwa ketika trafik FoodGo meningkat, beban yang harus ditangani oleh sistem juga meningkat. Semua modul masih berjalan pada satu server dan satu proses yang sama sehingga kapasitas resource yang tersedia menjadi terbatas.
+
+**Kenapa ini keliru:** Pada kasus FoodGo, masalah ini semakin terlihat ketika terjadi lonjakan trafik pada jam makan siang atau saat promo. Satu server harus menangani berbagai fungsi sekaligus, seperti pesanan, pembayaran, dan notifikasi kurir. Kondisi tersebut membuat resource yang tersedia harus digunakan oleh banyak proses secara bersamaan. Akibatnya, waktu respons dapat meningkat dan beberapa permintaan akhirnya mengalami timeout.
+
+**Dampak ke FoodGo:** Kondisi tersebut menyebabkan aplikasi menjadi lambat dan sebagian request dapat mengalami timeout. Jika beban terus meningkat, resource server dapat habis sehingga proses backend mengalami crash dan harus dilakukan restart secara manual. Dengan demikian, asumsi bahwa kapasitas jaringan dan resource dapat menangani peningkatan trafik tanpa batas membuat desain FoodGo tidak siap menghadapi lonjakan pengguna.
+
+**Solusi desain awal:** Memisahkan modul pesanan, pembayaran, dan notifikasi menjadi service yang berbeda agar beban tidak terpusat pada satu server. Service yang memiliki trafik tinggi dapat dijalankan pada beberapa instance dan request dibagi menggunakan load balancer. Untuk proses seperti notifikasi, FoodGo dapat menggunakan message queue sehingga proses dilakukan secara asynchronous dan tidak langsung membebani server utama.
+
+**Trade-off:**: Pemisahan service dan penambahan server dapat mengurangi beban pada satu server, tetapi membuat sistem lebih kompleks dan membutuhkan biaya serta resource tambahan. Komunikasi antar-service juga dapat menimbulkan masalah baru seperti latency dan kegagalan jaringan.
 
 ---
 
