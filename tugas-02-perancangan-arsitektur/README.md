@@ -61,4 +61,18 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 
 1. Kami memiih Service-Oriented Architecture(SOA) yang dikombinasikan dengan Publish-Subscribe. SOA berfungsi untuk memisahkan sistem menjadi beberapa service, seperti Pesanan, Pembayaran, Katalog Resto, dan Kurir/Notifikasi. Publish-Subscribe untuk komunikasi asinkron melalui Message Broker untuk event seperti pembayaran berhasil, notifikasi restoran, dan penugasan kurir.
 
-2. 
+2. flowchart LR
+    C[Customer] -->|Sync Request| API[API Gateway]
+    API -->|Sync| O[Order Service]
+    O -->|Sync Request / Response| K[Catalog Service]
+    O -->|Sync Request / Response - Timeout| P[Payment Service]
+    P -->|Async: PaymentSuccessful| MB[(Message Broker)]
+    MB -->|Async Event| O
+    O -->|Async: OrderConfirmed| MB
+    MB -->|Async Event| N[Courier / Notification Service]
+    N -->|Notification| R[Restaurant]
+    N -->|Courier Assignment| CR[Courier]
+    N -->|Async: CourierAssigned| MB
+    MB -->|Async Event| O
+
+3. 
