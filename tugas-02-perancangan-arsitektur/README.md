@@ -61,7 +61,8 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 
 1. Kami memiih Service-Oriented Architecture(SOA) yang dikombinasikan dengan Publish-Subscribe. SOA berfungsi untuk memisahkan sistem menjadi beberapa service, seperti Pesanan, Pembayaran, Katalog Resto, dan Kurir/Notifikasi. Publish-Subscribe untuk komunikasi asinkron melalui Message Broker untuk event seperti pembayaran berhasil, notifikasi restoran, dan penugasan kurir.
 
-2. '''
+2. Diagram
+```mermaid
 graph LR
     C[Customer] -->|Sync Request| API[API Gateway]
     API -->|Sync| O[Order Service]
@@ -74,8 +75,8 @@ graph LR
     N -->|Async Notification| R[Restaurant]
     N -->|Async Assignment| CR[Courier]
     N -->|Async Event: CourierAssigned| MB'''
-
-3.
+```
+4.
 Alur dimulai ketika pelanggan membuat pesanan melalui aplikasi FoodGo. Pesanan dikirim ke API Gateway secara sinkron menggunakan request-response, kemudian diteruskan ke Order Service. Order Service melakukan pengecekan menu, harga, dan ketersediaan ke Catalog Service secara sinkron. Setelah itu, Order Service mengirim permintaan pembayaran ke Payment Service secara sinkron dengan menggunakan timeout agar sistem tidak menunggu tanpa batas waktu.
 
 Jika pembayaran berhasil, Payment Service mengirim event "PaymentSuccessful" ke Message Broker secara asinkron. Event tersebut kemudian diterima oleh Order Service untuk mengonfirmasi pesanan. Setelah pesanan dikonfirmasi, Order Service mengirim event "OrderConfirmed" ke Message Broker.
