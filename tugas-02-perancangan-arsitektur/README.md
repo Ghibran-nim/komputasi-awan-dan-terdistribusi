@@ -78,9 +78,7 @@ graph LR
 ```
 
 3. Alur dimulai ketika pelanggan membuat pesanan melalui aplikasi FoodGo. Pesanan dikirim ke API Gateway secara sinkron menggunakan request-response, kemudian diteruskan ke Order Service. Order Service melakukan pengecekan menu, harga, dan ketersediaan ke Catalog Service secara sinkron. Setelah itu, Order Service mengirim permintaan pembayaran ke Payment Service secara sinkron dengan menggunakan timeout agar sistem tidak menunggu tanpa batas waktu.
-
-Jika pembayaran berhasil, Payment Service mengirim event "PaymentSuccessful" ke Message Broker secara asinkron. Event tersebut kemudian diterima oleh Order Service untuk mengonfirmasi pesanan. Setelah pesanan dikonfirmasi, Order Service mengirim event "OrderConfirmed" ke Message Broker.
-
-Message Broker kemudian meneruskan event tersebut ke Courier/Notification Service secara asinkron. Service ini mengirim notifikasi pesanan kepada restoran dan melakukan penugasan kurir. Setelah kurir ditugaskan, informasi penugasan dikirim kepada kurir secara asinkron. Dengan cara ini, proses yang membutuhkan respons langsung menggunakan komunikasi sinkron, sedangkan notifikasi dan pembaruan status menggunakan komunikasi asinkron melalui Message Broker.
+   Jika pembayaran berhasil, Payment Service mengirim event "PaymentSuccessful" ke Message Broker secara asinkron. Event tersebut kemudian diterima oleh Order Service untuk mengonfirmasi pesanan. Setelah pesanan dikonfirmasi, Order Service mengirim event "OrderConfirmed" ke Message Broker.
+   Message Broker kemudian meneruskan event tersebut ke Courier/Notification Service secara asinkron. Service ini mengirim notifikasi pesanan kepada restoran dan melakukan penugasan kurir. Setelah kurir ditugaskan, informasi penugasan dikirim kepada kurir secara asinkron. Dengan cara ini, proses yang membutuhkan respons langsung menggunakan komunikasi sinkron, sedangkan notifikasi dan pembaruan status menggunakan komunikasi asinkron melalui Message Broker.
 
 4. 
