@@ -3,7 +3,7 @@
 ## [27 September 2026]
 - Opsi arsitektur yang dipertimbangkan: Service-Oriented Architecture (SOA) atau Publish-Subscribe.
 - Kenapa akhirnya pilih [SOA/Pub-Sub]: Kita memilih SOA yang dikombinasikan dengan Pub-Sub dikarenakan SOA yang dapat memisahkan beberapa fungsi service lainnya dapat dengan mudah untuk di scale, sedangkan Pub-Sub akan membuat komunikasi antarmodul lebih fleksibel dan mengurangi coupling
-- Revisi diagram (versi 1 → versi 2, apa yang berubah dan kenapa): ...
+- Revisi diagram (versi 1 → versi 2, apa yang berubah dan kenapa): tidak ada
 
 ## Log Penggunaan AI (Level 2)
 
