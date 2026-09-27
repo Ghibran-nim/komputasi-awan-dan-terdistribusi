@@ -55,3 +55,10 @@ tugas-02-perancangan-arsitektur/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh memakai AI untuk brainstorming komponen apa saja yang umum ada di gaya arsitektur SOA/Pub-Sub; **tidak boleh** meminta AI menggambar diagram final atau menuliskan analisis trade-off yang tinggal ditempel. Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - Diagram Mermaid/draw.io yang "terlalu generik" (identik dengan contoh tutorial di internet tanpa penyesuaian ke kasus FoodGo) akan dinilai rendah pada komponen kelengkapan & kejelasan diagram.
+
+
+## Jawaban diskusi kami:
+
+1. Kami memiih Service-Oriented Architecture(SOA) yang dikombinasikan dengan Publish-Subscribe. SOA berfungsi untuk memisahkan sistem menjadi beberapa service, seperti Pesanan, Pembayaran, Katalog Resto, dan Kurir/Notifikasi. Publish-Subscribe untuk komunikasi asinkron melalui Message Broker untuk event seperti pembayaran berhasil, notifikasi restoran, dan penugasan kurir.
+
+2. 
