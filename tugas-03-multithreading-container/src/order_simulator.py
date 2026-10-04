@@ -18,6 +18,11 @@ processed_count = 0
 
 # TODO 1: Buat objek Lock di sini untuk melindungi `processed_count`.
 # lock = threading.Lock()
+lock = threading.Lock()
+
+# UBAH KE True UNTUK MENGGUNAKAN LOCK (LANGKAH 2)
+# UBAH KE False UNTUK MENUNJUKKAN RACE CONDITION (LANGKAH 1)
+USE_LOCK = True
 
 
 def process_order(order_id: int) -> None:
@@ -33,7 +38,17 @@ def process_order(order_id: int) -> None:
     # Langkah 2: bungkus increment dengan `with lock:` dan buktikan hasilnya
     #            selalu tepat NUM_ORDERS. Simpan bukti kedua kondisi ini
     #            di JURNAL.md / folder bukti/.
-    pass
+    if USE_LOCK:
+        with lock:
+            # Menggunakan Lock untuk menjamin ketersediaan thread-safe
+            current = processed_count
+            time.sleep(0.0001)  # Jeda singkat untuk memperjelas perpindahan konteks
+            processed_count = current + 1
+    else:
+        # Tanpa Lock (Memicu Race Condition)
+        current = processed_count
+        time.sleep(0.0001)  # Jeda singkat untuk memicu context switch
+        processed_count = current + 1
 
 
 def worker(order_ids: list) -> None:
@@ -49,7 +64,17 @@ def main() -> None:
     # threading.Thread per bagian yang menjalankan `worker(...)`,
     # start semua thread, lalu join semua thread sebelum lanjut.
     threads = []
-    # ... isi logika pembagian tugas & pembuatan thread di sini ...
+    
+    # Menghitung ukuran bagian pesanan untuk tiap pekerja
+    chunk_size = (len(order_ids) + NUM_WORKERS - 1) // NUM_WORKERS
+
+    for i in range(NUM_WORKERS):
+        # Membagi order_ids menjadi sub-list untuk masing-masing worker
+        sub_orders = order_ids[i * chunk_size : (i + 1) * chunk_size]
+        if sub_orders:
+            t = threading.Thread(target=worker, args=(sub_orders,))
+            threads.append(t)
+            t.start()
 
     for t in threads:
         t.join()
