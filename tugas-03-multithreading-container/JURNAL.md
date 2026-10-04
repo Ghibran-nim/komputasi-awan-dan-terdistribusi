@@ -15,5 +15,6 @@
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
-|04 Oktober 2026|gemini|membantu menganalisis race condition pada foodGO|Inilisiasi dan penyiapan hal-hal yang dibutuhkan||
+| --- | --- | --- | --- | --- |
+|04 Oktober 2026|gemini|membantu menganalisis race condition pada foodGO|Inilisiasi dan penyiapan hal-hal yang dibutuhkan|menyusun struktur folder proyek serta menyiapkan konfigurasi awal file|
 | ... | ... | ... | ... | ... |
