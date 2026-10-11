@@ -1,7 +1,9 @@
 # Jurnal Proses — Tugas 4
 
 ## Jalur yang dipilih
-- [RPC / MQ / keduanya], alasan: ...
+- [RPC / MQ / keduanya], alasan:
+- Menggunakan RPC karna method RPC sendiri memastikan respon yang real time, jadi client bisa langsung tau status transaksi nya berhasil atau gagal.
+- Menggunakan RabbitMQ karna di rabbitmq ada sistem decoupling, yang membuat sistem pembayaran dan modul bisa berjalan secara independen, jadi jika ada transaksi tinggal dimasukin ke dalam queue
 
 ## Kendala teknis
 - Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok):
