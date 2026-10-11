@@ -4,11 +4,12 @@
 - [RPC / MQ / keduanya], alasan: ...
 
 ## Kendala teknis
-- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
+- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok):
+  1. akses port RabbitMQ tidak dapat langsung dibuka melalui URL biasa. Dibuka melalui fitur ports yang tersedia di codespace karena pengerjaan yang digunakan melalui github codespace.
 
 ## Uji "pesan tidak hilang" (khusus Jalur B)
 - Langkah uji: matikan consumer → jalankan publisher → nyalakan consumer
-- Hasil yang diamati: ...
+- Hasil yang diamati: pesan tersimpan aman di dashboard RabbitMQ, terlihat status pesan ready bertambah/menumpuk di dashboard). Saat consumer dinyalakan seluruh pesan yang menumpuk lamgsung diambil dan diproses secara otomastis hingga status antrean kembali 0.(sesuai bukti screenshoot)
 
 ## Log Penggunaan AI (Level 2)
 
@@ -16,4 +17,4 @@
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 11 Oktober 2026 | GeminiAI | cara mengakses dashboard RabbitMQ di codespace | menjelaskan bahwa port 15672 dapat dibuka langsung melalui fitur ports yang tersedia di codespace | membuka tab "ports" pada codespace, lalu mengakses dashboard RabbitMQ melalui localhost:15672 tersebut |
