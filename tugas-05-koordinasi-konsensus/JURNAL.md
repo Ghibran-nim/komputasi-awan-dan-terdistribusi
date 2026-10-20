@@ -22,6 +22,7 @@ node 5 di force matiin, dan node 4 menjadi leader.
 
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
-|20 Oktober 2026|gemini|Bagaimana alur logika Bully Algorithm dan cara menangani timeout socket di Python?|Menjelaskan alur komunikasi pesan (ELECTION, OK, COORDINATOR) serta menyarankan penggunaan threading.Event untuk timeout.|memahami flow lalu mencoba mengimplementasikan ke code|
+| :--- | :--- | :--- | :--- | :--- |
+| 20 Oktober 2026 | Gemini | Bagaimana alur logika Bully Algorithm dan cara menangani timeout socket di Python? | Menjelaskan alur komunikasi pesan (ELECTION, OK, COORDINATOR) serta menyarankan penggunaan threading.Event untuk timeout. | Memahami flow lalu mencoba mengimplementasikan ke code |
 | ... | ... | ... | ... | ... |
-| ... | ... | ... | ... | ... |
+
