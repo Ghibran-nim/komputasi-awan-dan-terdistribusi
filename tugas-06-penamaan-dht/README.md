@@ -55,3 +55,47 @@ tugas-06-penamaan-dht/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh bertanya konsep umum consistent hashing/Chord ke AI; **tidak boleh** meminta AI menuliskan isi `# TODO` di `src/chord_simulation.py` (`find_successor`, `join`, `leave`, dst). Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - `README.md` wajib menelusuri manual (langkah demi langkah) bagaimana `lookup()` menemukan successor untuk salah satu ID Kurir contoh yang dipakai di `chord_simulation.py` — bukan cuma menempelkan output program.
+
+## Jawaban
+# 1. Kenapa DHT/Chord lebih cocok dibanding flat naming sederhana atau DNS konvensional?
+
+*   **Tanpa Single Point of Failure (SPOF):** Pada *flat naming* sederhana (seperti tabel pusat), jika server pusat *down*, seluruh resolusi alamat akan gagal. DHT mendistribusikan data *mapping* ke banyak node dalam topologi cincin (*ring*). Jika satu node mati, tanggung jawabnya otomatis dialihkan ke node lain (*successor*).
+*   **Adaptif terhadap IP Dinamis:** IP kurir sering berubah saat berpindah jaringan. DNS konvensional menggunakan mekanisme *caching* (TTL) yang rentan menyimpan IP usang (*stale data*). DHT/Chord memungkinkan *lookup* dan *update* dilakukan secara *real-time* langsung ke node penanggung jawab tanpa ada *delay* propagasi dari *cache* DNS.
+
+# 2. Ring Topology dari Simulasi
+
+Berdasarkan *output* program saat semua 5 node telah bergabung, node-node menempati *ring* berdasarkan nilai *hash ID*-nya dari yang terkecil hingga terbesar (lalu melingkar kembali ke awal):
+
+*   `node-bandung-1` (id=40)
+*   `node-jakarta-2` (id=102)
+*   `node-medan-1` (id=123)
+*   `node-surabaya-1` (id=136)
+*   `node-jakarta-1` (id=177)
+
+```mermaid
+graph TD
+    %% Deklarasi Node dalam Ring (Diurutkan berdasarkan Hash ID)
+    N1((node-bandung-1<br>id=40))
+    N2((node-jakarta-2<br>id=102))
+    N3((node-medan-1<br>id=123))
+    N4((node-surabaya-1<br>id=136))
+    N5((node-jakarta-1<br>id=177))
+    
+    %% Membentuk Cincin (Ring)
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    
+    %% Wrap-around dari node terbesar ke terkecil
+    N5 --> N1
+```
+
+# 3. Jelaskan apa yang terjadi pada mapping saat sebuah node **keluar** dari ring (siapa yang mengambil alih tanggung jawabnya) — dukung dengan output program.
+Saat sebuah node keluar atau putus dari ring, seluruh tanggung jawab data (kunci) yang sebelumnya dipegang oleh node tersebut akan dipindahkan secara otomatis ke successor barunya (node aktif selanjutnya di dalam ring).
+--- Sebuah node keluar ---
+[TODO] Node 'node-jakarta-1' (id=177) keluar dari ring
+       -> Tanggung jawab data dari node 177 dipindahkan ke successor baru (id=40)
+kurir-001 -> 192.168.1.10
+kurir-002 -> 192.168.1.11
+![](../tugas-06-penamaan-dht/bukti/bukti w6.png)
