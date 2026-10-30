@@ -98,4 +98,5 @@ Saat sebuah node keluar atau putus dari ring, seluruh tanggung jawab data (kunci
        -> Tanggung jawab data dari node 177 dipindahkan ke successor baru (id=40)
 kurir-001 -> 192.168.1.10
 kurir-002 -> 192.168.1.11
+
 ![](../tugas-06-penamaan-dht/bukti/bukti w6.png)
