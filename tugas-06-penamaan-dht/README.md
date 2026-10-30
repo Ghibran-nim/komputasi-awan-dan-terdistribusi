@@ -57,12 +57,12 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 - `README.md` wajib menelusuri manual (langkah demi langkah) bagaimana `lookup()` menemukan successor untuk salah satu ID Kurir contoh yang dipakai di `chord_simulation.py` — bukan cuma menempelkan output program.
 
 ## Jawaban
-# 1. Kenapa DHT/Chord lebih cocok dibanding flat naming sederhana atau DNS konvensional?
+# 1. Jelaskan **kenapa DHT/Chord** lebih cocok untuk kasus ini dibanding **flat naming sederhana** (mis. tabel pusat ID→IP) atau **DNS konvensional** — kaitkan dengan sifat "IP kurir sering berubah" dan kebutuhan tanpa titik gagal tunggal.
 
 *   **Tanpa Single Point of Failure (SPOF):** Pada *flat naming* sederhana (seperti tabel pusat), jika server pusat *down*, seluruh resolusi alamat akan gagal. DHT mendistribusikan data *mapping* ke banyak node dalam topologi cincin (*ring*). Jika satu node mati, tanggung jawabnya otomatis dialihkan ke node lain (*successor*).
 *   **Adaptif terhadap IP Dinamis:** IP kurir sering berubah saat berpindah jaringan. DNS konvensional menggunakan mekanisme *caching* (TTL) yang rentan menyimpan IP usang (*stale data*). DHT/Chord memungkinkan *lookup* dan *update* dilakukan secara *real-time* langsung ke node penanggung jawab tanpa ada *delay* propagasi dari *cache* DNS.
 
-# 2. Ring Topology dari Simulasi
+# 2. Gambarkan (boleh pakai Mermaid, lihat Tugas 2) ring topology dari simulasi kalian, tandai node mana yang bertanggung jawab atas ID Kurir mana.
 
 Berdasarkan *output* program saat semua 5 node telah bergabung, node-node menempati *ring* berdasarkan nilai *hash ID*-nya dari yang terkecil hingga terbesar (lalu melingkar kembali ke awal):
 
@@ -93,10 +93,14 @@ graph TD
 
 # 3. Jelaskan apa yang terjadi pada mapping saat sebuah node **keluar** dari ring (siapa yang mengambil alih tanggung jawabnya) — dukung dengan output program.
 Saat sebuah node keluar atau putus dari ring, seluruh tanggung jawab data (kunci) yang sebelumnya dipegang oleh node tersebut akan dipindahkan secara otomatis ke successor barunya (node aktif selanjutnya di dalam ring).
+
+***Bukti Output Program***
+```text
 --- Sebuah node keluar ---
 [TODO] Node 'node-jakarta-1' (id=177) keluar dari ring
        -> Tanggung jawab data dari node 177 dipindahkan ke successor baru (id=40)
 kurir-001 -> 192.168.1.10
 kurir-002 -> 192.168.1.11
-
+```
+***Bukti Output Keseluruhan***
 ![](../tugas-06-penamaan-dht/bukti/bukti-w6.png)
