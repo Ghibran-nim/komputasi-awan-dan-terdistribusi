@@ -11,6 +11,14 @@ Data saldo *e-wallet* pelanggan FoodGo berbeda antara server wilayah **Jakarta**
 ### Bagian 1 — Analisis (wajib)
 
 1. Tentukan: apakah kasus ini **membutuhkan Sequential Consistency** (semua replika melihat urutan operasi yang sama) atau **cukup Eventual Consistency** (replika akan konsisten "pada akhirnya", boleh sementara berbeda)? Berikan argumen berbasis dampak bisnis (mis. kasus saldo *e-wallet* jauh lebih sensitif dibanding kasus "jumlah like" di media sosial).
+jawab.
+Eventual Consistency saja tidak cukup. Replika baru dijamin sama "pada akhirnya", tanpa kepastian kapan dan tanpa jaminan apa yang dibaca selama menunggu. Untuk saldo e-wallet, dampaknya langsung ke bisnis:
+Pesanan ditolak padahal saldo cukup, sehingga pelanggan kesal dan pendapatan hilang.
+Saldo adalah uang nyata, jadi saldo yang tampak "hilang" memicu keluhan dan churn.
+Dua pembayaran yang membaca saldo lama bisa menyebabkan double-spend atau saldo negatif.
+Riwayat transaksi harus berurutan agar bisa diaudit.
+Pada kasus jumlah like, data yang tertinggal beberapa detik tidak merugikan siapa pun, jadi Eventual sudah cukup. Konsistensi ketat di semua replika memang mahal (latency naik), sehingga yang benar-benar dibutuhkan adalah urutan operasi yang konsisten per akun. Data lain seperti menu dan rating tetap boleh Eventual.
+
 2. Jika kalian menyimpulkan Eventual Consistency saja **tidak cukup** untuk skenario ini, usulkan pendekatan **Client-Centric Consistency** yang relevan (mis. *Read-Your-Writes*: pelanggan yang baru top-up harus selalu melihat saldo terbarunya sendiri, walau replika lain belum sinkron).
 3. Gambarkan **diagram alir urutan (sequence diagram)** yang menunjukkan operasi read/write antara pelanggan, server Jakarta, server Bandung, dan proses replikasi — untuk skenario **tanpa** jaminan konsistensi (bug terjadi) DAN skenario **dengan** solusi yang kalian usulkan (bug teratasi). Pakai Mermaid (`sequenceDiagram`) di `README.md` — lihat contoh cara pakai di Tugas 2.
 
